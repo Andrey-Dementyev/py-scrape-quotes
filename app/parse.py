@@ -18,10 +18,11 @@ class Quote:
 QUOTE_FIELDS = [field.name for field in fields(Quote)]
 
 
-def get_next_page(page_soup: Tag) -> str:
+def get_next_page(page_soup: Tag) -> str | None:
     pagination = page_soup.select_one("li.next > a")
     if pagination:
         return pagination.attrs["href"]
+    return None
 
 
 def parse_single_quote(page_soup: Tag) -> Quote:
